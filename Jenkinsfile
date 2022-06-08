@@ -41,7 +41,7 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'webserver_login', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                     script {
-                        sh 'ssh $USERNAME@$prod_ip -o StrictHostKeyChecking=no'
+                        sh 'sshpass -p '$PASSWORD' -v ssh $USERNAME@$prod_ip -o StrictHostKeyChecking=no'
                         sh 'hostname -I'   
                     }
                 }
