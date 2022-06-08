@@ -14,7 +14,7 @@ pipeline {
             }
             steps {
                 script {
-                    app = docker.build("karimka2303/train-schedule")
+                    app = docker.build("karimka2302/train-schedule")
                     app.inside {
                         sh 'echo $(curl localhost:8080)'   
                     }
@@ -28,7 +28,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-                        app.push("${env.BUILD_BUMBER}")   
+                        app.push("${env.BUILD_NUMBER}")   
                     }
                 }
             }
