@@ -12,7 +12,7 @@ pipeline {
             steps {
                 script {
                     docker.build("karimka2303/train-schedule")
-                    docker.Image.inside[("karimka2303/train-schedule")] {
+                    Image.inside[("karimka2303/train-schedule")] {
                         sh 'curl locahost:8080'   
                     }
                 }
