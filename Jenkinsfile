@@ -9,6 +9,9 @@ pipeline {
             }
         }
         stage('Build Docker Image') {
+            when {
+                branch 'master'   
+            }
             steps {
                 script {
                     app = docker.build("karimka2303/train-schedule")
@@ -16,7 +19,19 @@ pipeline {
                         sh 'echo $(curl localhost:8080)'   
                     }
                 }
-            }   
+            }  
+        }
+        stage('Push docker Image') {
+            when {
+                branch 'master'   
+            }
+            steps {
+                script {
+                    docker.withRegistry('https://regustry.hub.docker.com', 'dockerhub') {
+                        app.push("${env.BUILD_BUMBER}")   
+                    }
+                }
+            }
         }
     }
 }
