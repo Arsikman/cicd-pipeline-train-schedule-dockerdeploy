@@ -41,15 +41,15 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'webserver_login', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                     script {
-                        sh "sshpass -p '$PASSWORD' -v ssh $USERNAME@$prod_ip -o StrictHostKeyChecking=no" \"docker pull karimka2302/train-schedule:latest""
+                        sh "sshpass -p '$PASSWORD' -v ssh $USERNAME@$prod_ip -o StrictHostKeyChecking=no \"docker pull karimka2302/train-schedule:latest""
                         try {
-                            sh "sshpass -p '$PASSWORD' -v ssh $USERNAME@$prod_ip -o StrictHostKeyChecking=no" \"docker stop train-schedule""
-                            sh "sshpass -p '$PASSWORD' -v ssh $USERNAME@$prod_ip -o StrictHostKeyChecking=no" \"docker rm train-schedule""
+                            sh "sshpass -p '$PASSWORD' -v ssh $USERNAME@$prod_ip -o StrictHostKeyChecking=no \"docker stop train-schedule""
+                            sh "sshpass -p '$PASSWORD' -v ssh $USERNAME@$prod_ip -o StrictHostKeyChecking=no \"docker rm train-schedule""
                         }
                         catch (err) {
                             echo 'caught error: $err'
                         }
-                        sh "sshpass -p '$PASSWORD' -v ssh $USERNAME@$prod_ip -o StrictHostKeyChecking=no" \"docker start --restart always --name train-schedule -d -p 8080:8080 karimka2303/train-schedule:latest""  
+                        sh "sshpass -p '$PASSWORD' -v ssh $USERNAME@$prod_ip -o StrictHostKeyChecking=no \"docker start --restart always --name train-schedule -d -p 8080:8080 karimka2303/train-schedule:latest""  
                     }
                 }
             }
