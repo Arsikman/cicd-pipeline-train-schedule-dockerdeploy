@@ -13,7 +13,7 @@ pipeline {
                 script {
                     app = docker.build("karimka2303/train-schedule")
                     app.inside {
-                        sh 'curl locahost:8080'   
+                        sh 'curl localhost:8080'   
                     }
                 }
             }   
