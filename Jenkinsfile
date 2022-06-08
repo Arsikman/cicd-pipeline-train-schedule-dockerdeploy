@@ -11,8 +11,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build("karimka2303/train-schedule")
-                    Image.inside[("karimka2303/train-schedule")] {
+                    app = docker.build("karimka2303/train-schedule")
+                    app.inside {
                         sh 'curl locahost:8080'   
                     }
                 }
