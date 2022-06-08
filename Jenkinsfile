@@ -34,5 +34,18 @@ pipeline {
                 }
             }
         }
+        stage('Deploy to Production') {
+            when {
+                branch 'master'   
+            }
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'webserver_login', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    script {
+                        sh 'ssh $USERNAME@$prod_ip'
+                        sh 'hostname -I'   
+                    }
+                }
+            }
+        }
     }
 }
