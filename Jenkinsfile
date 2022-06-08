@@ -8,5 +8,8 @@ pipeline {
                 archiveArtifacts artifacts: 'dist/trainSchedule.zip'
             }
         }
+        stage('Build Docker Image') {
+            docker.build("karimka2303/train-schedule")   
+        }
     }
 }
