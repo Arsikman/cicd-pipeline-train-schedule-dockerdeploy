@@ -10,7 +10,9 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                docker.build("karimka2303/train-schedule")   
+                script {
+                    docker.build("karimka2303/train-schedule")   
+                }
             }   
         }
     }
